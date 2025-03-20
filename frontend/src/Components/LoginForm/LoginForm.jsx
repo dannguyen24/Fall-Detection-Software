@@ -2,23 +2,18 @@ import './LoginForm.css';
 import { FaUserAlt, FaLock} from "react-icons/fa";
 import React, {useState} from "react";
 import axios from 'axios';
-
+import { useLogin } from "../../hooks/useLogin";
 const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const {login, isLoading, error} = useLogin();
 
     const handleLogin = async (e) => {
         console.log("Get into handle log in")
         e.preventDefault()
-        try {
-            console.log("Submitting:", {email, password });
-            const result = await axios.post('http://localhost:5000/api/users/login', {email, password});
-            console.log("Success:", result.data);
-            // Add user feedback here (redirect or success message)
-        } catch (err) {
-            console.log("Error:", err.response?.data || err.message);
-            // Add error feedback to the user
-        }
+        await login(email, password);
+        console.log("After login")
+      
     }
     return (
         <div className="wrapper">
@@ -34,7 +29,8 @@ const LoginForm = () => {
                     <FaLock className="icon"/>
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" disabled={isLoading}>Login</button>
+                {error && <div className="error">{error}</div>}
                 
             </form>
         </div>

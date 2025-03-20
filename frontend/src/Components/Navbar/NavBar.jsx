@@ -24,14 +24,11 @@ const NavBar = () => {
                 <li onClick={()=>{setMenu("something1")}}><Link style = {{ textDecoration: 'none'}} to='/something1'>Fall detection</Link>{menu==="something1"?<hr/>:<></>}</li>
             </ul>
 
-            
-
             <div className="nav-login">
                 <Link to = '/login'><button>Login</button></Link>
                 <Link to ='./signup'><button>Signup</button></Link>
                 <button onClick={handleButton}>Log out</button>
                 
-
             </div>
         </div>
     );
