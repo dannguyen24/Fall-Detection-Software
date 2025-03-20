@@ -1,9 +1,10 @@
+import axios from "axios"
 import { AuthContext } from "../context/authContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
-export const useSignup = () => {
+export const useSignUp = () => {
         const [error, setError] = useState(null)
-        const [isLoading, setIsLoading] = useState(null)
+        const [isLoading, setIsLoading] = useState(false)
         const {dispatch} = useContext(AuthContext)
 
         const signup = async (username, email, password) => {
@@ -24,7 +25,7 @@ export const useSignup = () => {
                         setIsLoading(false)
                 } catch (err) {
                         // Add error feedback to the user
-                        setError(err.response?.data || err.message);
+                        setError(err.response?.data.message || err.message);
                         setIsLoading(false)
                         console.log("Error:", err.response?.data || err.message);
                 }
