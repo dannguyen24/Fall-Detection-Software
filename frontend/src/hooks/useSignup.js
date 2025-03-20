@@ -23,6 +23,7 @@ export const useSignUp = () => {
                         //update the auth context
                         dispatch({type: 'LOGIN', payload: result.data})
                         setIsLoading(false)
+                        
                 } catch (err) {
                         // Add error feedback to the user
                         setError(err.response?.data.message || err.message);
