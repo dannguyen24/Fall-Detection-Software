@@ -1,6 +1,6 @@
 //createContext is used to create a context object.
 //useReducer is used to manage context
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer, useEffect } from 'react'
 
 //Keep track of the user's state
 //When logged in, the user will have a property. When logged out, the user will be null.
@@ -51,6 +51,13 @@ export const AuthContextProvider = ({ children }) => {
                 //Initial state of the user is null
                 user: null
         })
+        useEffect(() => {
+          const user = JSON.parse(localStorage.getItem('user'))
+          if (user) {
+            //If user exists in local storage, update the state with the user object
+            dispatch({ type: 'LOGIN', payload: user });
+          }
+        }, [])
         console.log('AuthContext state:', state)
         
         return (

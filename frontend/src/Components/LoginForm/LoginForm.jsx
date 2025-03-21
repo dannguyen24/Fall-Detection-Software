@@ -1,7 +1,6 @@
 import './LoginForm.css';
 import { FaUserAlt, FaLock} from "react-icons/fa";
 import React, {useState} from "react";
-import axios from 'axios';
 import { useLogin } from "../../hooks/useLogin";
 const LoginForm = () => {
     const [password, setPassword] = useState("");
